@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Add Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="booksky.css">
+      
+
+</head>
+
+<body>
+
+    <div class="overlay"></div>
+    <!-- Added a book icon using Font Awesome in front of the h1 tag -->
+    <h1><i class="fas fa-book"></i> Booksky</h1>
+
+    <div class="container">
+        <div class="content">
+            <h2>Ponniyan Selvan</h2>
+            <h4>Kalki</h4>
+            <p>Ponniyin Selvan, authored by Kalki Krishnamurthy, is a brilliant set of five volumes in Tamil. It is a historical novel, which recounts the story of Raja Raja Chola I. Ponniyin Selvan means 'The son of Ponni'. It chronicles the story Arulmozhivarman, who was crowned as Raja Raja Chola I in the later years.</p>
+            <button onclick="deleteItem(event)" id="delete-btn">Delete</button>
+        </div>
+    </div>
+    <div class="pop">
+        <input type="text" placeholder="Enter Book name" id="name"><br>
+        <input type="text" placeholder="Enter author name" id="author"><br>
+        <textarea placeholder="Description" id="des"></textarea><br>
+        <button onclick="additem()" id="addbtn1">Add</button>
+        <button id="closePopup">Cancel</button>
+    </div>
+    <button id="btn">+</button>
+
+    <script>
+        var addbtn = document.getElementById("btn");
+        var popup = document.querySelector(".pop");
+        var over = document.querySelector(".overlay");
+
+        // Show popup
+        addbtn.addEventListener("click", function () {
+            popup.style.display = "block";
+            over.style.display = "block";
+        });
+
+        // Close popup
+        var closePopup = document.getElementById("closePopup");
+        closePopup.addEventListener("click", function () {
+            popup.style.display = "none";
+            over.style.display = "none";
+        });
+
+        var ctn = document.querySelector(".container");
+        var bname = document.getElementById("name");
+        var bauthor = document.getElementById("author");
+        var bdes = document.getElementById("des");
+
+        function additem() {
+            var div = document.createElement('div');
+            div.setAttribute("class", "content");
+            div.innerHTML = `<h2>${bname.value}</h2><h4>${bauthor.value}</h4><p>${bdes.value}</p><button onclick="deleteItem(event)"id="delete-btn">Delete</button>`;
+            ctn.append(div);
+
+            // Clear inputs after adding the item
+            bname.value = "";
+            bauthor.value = "";
+            bdes.value = "";
+
+            popup.style.display = "none";
+            over.style.display = "none";
+
+            // Attach delete event listener to the newly created delete button
+           
+        }
+
+        // Function to delete a book entry
+        function deleteItem(event){
+
+                     event.target.parentElement.remove()
+         }
+    </script>
+
+</body>
+
+</html>
